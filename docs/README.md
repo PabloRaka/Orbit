@@ -25,10 +25,16 @@ docs/
 │   ├── 02_MATHEMATICAL_AND_PHYSICAL_FORMULATION.md
 │   ├── 03_SOFTWARE_SIMULATION_SPECIFICATION.md
 │   └── 04_HARDWARE_ROADMAP_AND_MAPPING.md
-├── rfcs/                          # Modular RFCs (Subsystems & Specifications)
+├── rfcs/                          # Modular RFC Subsystem Specifications
+│   ├── README.md                  # RFC Registry & Lifecycle
+│   ├── RFC-001_TOKENLESS_SPECTRAL_TRANSDUCER.md
+│   ├── RFC-002_SYMPLECTIC_HAMILTONIAN_INTEGRATORS.md
+│   ├── RFC-003_EQUILIBRIUM_PROPAGATION_MEMRISTIVE_CROSSBAR.md
+│   └── RFC-004_THERMAL_NOISE_BOLTZMANN_SAMPLING.md
 └── benchmarks/                    # Simulation Results & Physical Verification
     ├── 01_PHYSICAL_AND_NUMERICAL_BENCHMARK_SUITE.md
-    └── 02_PHASE0_EMPIRICAL_BASELINE_RESULTS.md
+    ├── 02_PHASE0_EMPIRICAL_BASELINE_RESULTS.md
+    └── 03_TIER4_COMPARATIVE_SCALING_RESULTS.md
 ```
 
 ---
@@ -46,16 +52,31 @@ The foundational architecture is documented in [`docs/backbone/`](backbone/READM
 
 ---
 
-## Governance and RFC Lifecycle
+## Subsystem Specifications (RFCs)
 
-```mermaid
-flowchart TD
-    A[Backbone Docs 01-04] --> B[Experimental Software Simulation in JAX/Diffrax]
-    B --> C{Empirical Verification & Convergence}
-    C -->|Stabilized Mechanics| D[Modular RFCs: Hardware Specs, Circuit Layouts, Specific Tasks]
-    C -->|Theoretical Refinement| A
-```
+Documented in [`docs/rfcs/`](rfcs/README.md):
 
-As specified in the architectural alignment:
-- The **4 Backbone Documents** serve as the ground truth principles.
-- **Modular RFCs (Request for Comments)** will only be branched once the numerical simulation stabilizes empirical learning dynamics, preventing premature churn and architectural thrashing.
+| RFC | Title | Subsystem Area |
+| :--- | :--- | :--- |
+| **[RFC-001](rfcs/RFC-001_TOKENLESS_SPECTRAL_TRANSDUCER.md)** | **Tokenless Spectral Transducer** | Input/Output Wavefield Interface |
+| **[RFC-002](rfcs/RFC-002_SYMPLECTIC_HAMILTONIAN_INTEGRATORS.md)** | **Symplectic Hamiltonian Integrators** | Spectral FFT & Wave Solvers |
+| **[RFC-003](rfcs/RFC-003_EQUILIBRIUM_PROPAGATION_MEMRISTIVE_CROSSBAR.md)** | **Equilibrium Propagation on Crossbars** | Local Learning Without Backpropagation |
+| **[RFC-004](rfcs/RFC-004_THERMAL_NOISE_BOLTZMANN_SAMPLING.md)** | **Thermal Johnson-Nyquist Sampling** | Hardware Noise & Stochastic Generation |
+
+---
+
+## Verification & Benchmarks
+
+Documented in [`docs/benchmarks/`](benchmarks/01_PHYSICAL_AND_NUMERICAL_BENCHMARK_SUITE.md):
+
+| Report | Title | Description |
+| :--- | :--- | :--- |
+| **[Benchmark 01](benchmarks/01_PHYSICAL_AND_NUMERICAL_BENCHMARK_SUITE.md)** | **4-Tier Benchmark Specification** | Test protocols for Physics, Mechanisms, Language, and Scaling. |
+| **[Results 02](benchmarks/02_PHASE0_EMPIRICAL_BASELINE_RESULTS.md)** | **Phase 0 Empirical Baseline Results** | Machine-precision norm & energy calibration data. |
+| **[Results 03](benchmarks/03_TIER4_COMPARATIVE_SCALING_RESULTS.md)** | **Tier 4 Comparative Scaling Results** | 29,491x memory footprint advantage over NanoGPT at 32k context. |
+
+---
+
+## Architectural Integrity
+
+All implementations in `src/` are tested and validated against the mathematical formulations and benchmarks documented in this suite. The documentation in `docs/` serves as the sole ground-truth specification for the project.
