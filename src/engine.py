@@ -14,6 +14,7 @@ from src.baseline_phase0 import ContinuousWaveEngine
 from src.associative_memory import ContinuousAssociativeMemory
 from src.dyck_resonator import PhaseLockingDyckCavity
 from src.equilibrium_propagation import MemristiveCrossbarNetwork
+from src.sequence_trainer import AutoregressiveSequenceTrainer
 from src.bridge import TensorStreamBridge
 
 
@@ -25,7 +26,8 @@ class PhysLMEngine:
         self,
         n_grid: int = 1024,
         x_min: float = -20.0,
-        x_max: float = 20.0
+        x_max: float = 20.0,
+        context_window: int = 1
     ):
         self.n_grid = n_grid
         self.x_min = x_min
@@ -53,7 +55,14 @@ class PhysLMEngine:
             dt=0.15
         )
 
-        # 6. Tensor Interoperability Bridge
+        # 6. Autoregressive Causal Sequence Trainer & Generative Sampler
+        self.sequence_trainer = AutoregressiveSequenceTrainer(
+            transducer=self.transducer,
+            network=self.learning_network,
+            context_window=context_window
+        )
+
+        # 7. Tensor Interoperability Bridge
         self.bridge = TensorStreamBridge()
 
     def encode(self, text: str) -> np.ndarray:
@@ -83,3 +92,31 @@ class PhysLMEngine:
     def check_syntax(self, expr: str) -> Tuple[bool, Dict[str, Any]]:
         """Validates nested grammatical recursion without a digital stack."""
         return self.grammar_cavity.parse(expr)
+
+    def train_autoregressive(
+        self,
+        corpus: str,
+        epochs: int = 20,
+        free_steps: int = 25,
+        nudge_steps: int = 12
+    ) -> Dict[str, Any]:
+        """Trains physical crossbars on text sequences via local Equilibrium Propagation."""
+        return self.sequence_trainer.train(
+            corpus=corpus,
+            epochs=epochs,
+            free_steps=free_steps,
+            nudge_steps=nudge_steps
+        )
+
+    def generate_autoregressive(
+        self,
+        seed: str,
+        max_chars: int = 30,
+        temperature: float = 0.0
+    ) -> str:
+        """Generates text autoregressively via next-wave prediction and quantum measurement."""
+        return self.sequence_trainer.generate(
+            seed=seed,
+            max_chars=max_chars,
+            temperature=temperature
+        )
