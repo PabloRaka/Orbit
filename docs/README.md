@@ -35,14 +35,14 @@ docs/
 
 ## Architectural Backbone
 
-The foundational architecture is documented in [`docs/backbone/`](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/docs/backbone/README.md):
+The foundational architecture is documented in [`docs/backbone/`](backbone/README.md):
 
 | Document | Title | Description |
 | :--- | :--- | :--- |
-| **[Doc 01](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/docs/backbone/01_VISION_AND_GRAND_ARCHITECTURE.md)** | **Vision & Grand Architecture** | High-level paradigm shift, why Transformers are silicon artifacts, system topology, and the 3-tiered learning hierarchy. |
-| **[Doc 02](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/docs/backbone/02_MATHEMATICAL_AND_PHYSICAL_FORMULATION.md)** | **Mathematical & Physical Formulation** | Rigorous mathematical equations, Hilbert state representations, Non-linear Schrödinger/Ginzburg-Landau dynamics, and action principles. |
-| **[Doc 03](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/docs/backbone/03_SOFTWARE_SIMULATION_SPECIFICATION.md)** | **Software Simulation Specification** | Computational architecture using JAX and Diffrax, numerical symplectic integrators, and PyTorch compatibility bridge. |
-| **[Doc 04](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/docs/backbone/04_HARDWARE_ROADMAP_AND_MAPPING.md)** | **Hardware Mapping & Phased Roadmap** | Phased trajectory from software ODE/SDE solvers to Analog CMOS, Mid-Term Tri-Substrate Hybrids, and Long-Term All-Photonic architectures. |
+| **[Doc 01](backbone/01_VISION_AND_GRAND_ARCHITECTURE.md)** | **Vision & Grand Architecture** | High-level paradigm shift, why Transformers are silicon artifacts, system topology, and the 3-tiered learning hierarchy. |
+| **[Doc 02](backbone/02_MATHEMATICAL_AND_PHYSICAL_FORMULATION.md)** | **Mathematical & Physical Formulation** | Rigorous mathematical equations, Hilbert state representations, Non-linear Schrödinger/Ginzburg-Landau dynamics, and action principles. |
+| **[Doc 03](backbone/03_SOFTWARE_SIMULATION_SPECIFICATION.md)** | **Software Simulation Specification** | Computational architecture using JAX and Diffrax, numerical symplectic integrators, and PyTorch compatibility bridge. |
+| **[Doc 04](backbone/04_HARDWARE_ROADMAP_AND_MAPPING.md)** | **Hardware Mapping & Phased Roadmap** | Phased trajectory from software ODE/SDE solvers to Analog CMOS, Mid-Term Tri-Substrate Hybrids, and Long-Term All-Photonic architectures. |
 
 ---
 

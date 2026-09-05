@@ -1,7 +1,7 @@
 # Project Resonon / PhysLM: RFC Index
 ## Modular Technical Specifications & Subsystems
 
-This directory houses granular **Requests for Comments (RFCs)** that extend the core [Backbone Specifications](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/docs/backbone/README.md).
+This directory houses granular **Requests for Comments (RFCs)** that extend the core [Backbone Specifications](../backbone/README.md).
 
 ---
 

@@ -5,7 +5,7 @@
 
 ## 1. Executive Summary
 
-This document records the empirical results of the **Phase 0 Baseline Execution** ([`src/baseline_phase0.py`](file:///c:/Users/Lenovo/Documents/projects/mesosfer/llm/src/baseline_phase0.py)). 
+This document records the empirical results of the **Phase 0 Baseline Execution** ([`src/baseline_phase0.py`](../../src/baseline_phase0.py)). 
 
 Following the hierarchical validation methodology (Numerical Correctness $\to$ Physical Invariants $\to$ Hardware Robustness), these empirical measurements replace speculative assumptions with concrete numerical floors for all subsequent development.
 
