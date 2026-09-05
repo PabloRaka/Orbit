@@ -36,6 +36,8 @@ class ContinuousWaveEngine:
         self.mass = mass
         self.g = g
         self.noise_sigma = noise_sigma
+        # Spectral frequency grid for symplectic split-operator propagation
+        self.k = 2.0 * np.pi * np.fft.fftfreq(n_grid, d=self.dx)
 
     def laplacian(self, psi: np.ndarray) -> np.ndarray:
         """Periodic boundary central difference Laplacian."""
@@ -52,6 +54,26 @@ class ContinuousWaveEngine:
         pot = potential * np.abs(psi) ** 2
         interaction = 0.5 * self.g * (np.abs(psi) ** 4)
         return float(np.real(np.sum(kinetic + pot + interaction) * self.dx))
+
+    def step_unitary_split_operator(self, psi: np.ndarray, potential: np.ndarray, dt: float) -> np.ndarray:
+        """
+        Symplectic Strang Split-Operator FFT Integrator:
+        e^{-i H dt} = e^{-i V dt/2} e^{-i T dt} e^{-i V dt/2}
+        Preserves probability norm to machine precision (drift < 1e-14) unconditionally.
+        """
+        # Half-step potential phase rotation
+        v_eff = potential + self.g * (np.abs(psi) ** 2)
+        psi_half = psi * np.exp(-1j * (v_eff / self.hbar) * (0.5 * dt))
+        
+        # Full-step kinetic evolution in Fourier space
+        psi_k = np.fft.fft(psi_half)
+        t_phase = (self.hbar * (self.k ** 2) / (2.0 * self.mass)) * dt
+        psi_k_next = psi_k * np.exp(-1j * t_phase)
+        psi_kinetic = np.fft.ifft(psi_k_next)
+        
+        # Final half-step potential phase rotation
+        v_eff_next = potential + self.g * (np.abs(psi_kinetic) ** 2)
+        return psi_kinetic * np.exp(-1j * (v_eff_next / self.hbar) * (0.5 * dt))
 
     def unitary_derivative(self, psi: np.ndarray, potential: np.ndarray) -> np.ndarray:
         """Unitary real-time evolution: d(psi)/dt = -i/hbar * H[psi]."""
